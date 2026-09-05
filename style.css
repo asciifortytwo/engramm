@@ -1,0 +1,288 @@
+/* ==========================================================================
+   Tokyo Night Color Palette variables
+   ========================================================================== */
+:root {
+    --bg-main: #1a1b26;
+    --bg-sidebar: #16161e;
+    --bg-navbar: #1f2335;
+    --fg-main: #a9b1d6;
+    --fg-heading: #c0caf5;
+    --accent-blue: #7aa2f7;
+    --accent-magenta: #bb9af3;
+    --accent-cyan: #7dcfff;
+    --border-color: #24283b;
+}
+
+/* ==========================================================================
+   Global Reset & Base Layout Styles
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--fg-main);
+    line-height: 1.6;
+}
+
+/* ==========================================================================
+   Top Header Navigation Panel
+   ========================================================================== */
+.navbar {
+    background-color: var(--bg-navbar);
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--border-color);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: var(--accent-cyan);
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* Mobile Toggle Menu Drawer Trigger button */
+.menu-toggle {
+    display: none;
+    background-color: var(--border-color);
+    color: var(--fg-heading);
+    border: 1px solid var(--accent-blue);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+}
+
+.menu-toggle:hover {
+    background-color: var(--bg-main);
+}
+
+/* ==========================================================================
+   Primary Layout Wrapper Structure
+   ========================================================================== */
+.container {
+    display: flex;
+    max-width: 1200px;
+    margin: 4rem auto 0 auto;
+    padding: 2rem;
+    gap: 2rem;
+}
+
+/* ==========================================================================
+   Sidebar Component (Interactive Content Tree)
+   ========================================================================== */
+.sidebar {
+    width: 250px;
+    position: sticky;
+    top: 6rem;
+    height: calc(100vh - 8rem);
+    overflow-y: auto;
+    background-color: var(--bg-sidebar);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    z-index: 90;
+}
+
+.content-tree ul {
+    list-style: none;
+}
+
+.content-tree li {
+    margin-bottom: 0.5rem;
+}
+
+.nested-tree {
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+}
+
+.tree-item {
+    display: block;
+    color: var(--fg-main);
+    text-decoration: none;
+    font-size: 0.95rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.tree-item:hover {
+    color: var(--accent-blue);
+    background-color: var(--bg-navbar);
+}
+
+.tree-item.active {
+    color: var(--accent-magenta);
+    font-weight: bold;
+    background-color: var(--border-color);
+}
+
+/* Custom Scrollbar rendering inside the navigation menu */
+.sidebar::-webkit-scrollbar {
+    width: 4px;
+}
+.sidebar::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+}
+
+/* ==========================================================================
+   Main Article Content Block
+   ========================================================================== */
+.article {
+    flex: 1;
+    max-width: 800px;
+    min-width: 0; /* Guard configuration framework against item overflow */
+}
+
+.article-header {
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+}
+
+.article-header h1 {
+    color: var(--fg-heading);
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.metadata {
+    color: var(--accent-blue);
+    font-size: 0.9rem;
+    font-family: monospace;
+}
+
+section {
+    margin-bottom: 2.5rem;
+}
+
+h2 {
+    color: var(--accent-blue);
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.3rem;
+}
+
+h3 {
+    color: var(--accent-cyan);
+    font-size: 1.3rem;
+    margin: 1.5rem 0 0.5rem 0;
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+/* ==========================================================================
+   Integrated Markmap Component Styles & Color Overrides
+   ========================================================================== */
+.markmap-container {
+    background-color: var(--bg-sidebar);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 1.5rem 0;
+}
+
+svg.markmap {
+    width: 100%;
+    height: 50vh;
+    display: block;
+}
+
+/* Force standard dark mode text formatting inside Markmap's deep HTML layout objects */
+svg.markmap foreignObject div,
+svg.markmap foreignObject span,
+svg.markmap foreignObject p,
+svg.markmap foreignObject {
+    color: var(--fg-main) !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+}
+
+/* Fallback vector graphics text styling rule */
+svg.markmap text {
+    fill: var(--fg-main) !important;
+}
+
+/* Nested typography styles overrides within the map graphic engine */
+svg.markmap foreignObject strong,
+svg.markmap foreignObject h1,
+svg.markmap foreignObject h2,
+svg.markmap foreignObject h3 {
+    color: var(--fg-heading) !important;
+}
+
+svg.markmap foreignObject a {
+    color: var(--accent-cyan) !important;
+}
+
+svg.markmap foreignObject code {
+    background-color: var(--bg-navbar) !important;
+    color: var(--accent-magenta) !important;
+    padding: 2px 4px;
+    border-radius: 4px;
+}
+
+/* ==========================================================================
+   Responsive Media Queries (Tablets & Mobile Viewports)
+   ========================================================================== */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block; /* Reveal header navigation trigger action */
+    }
+
+    .container {
+        flex-direction: column;
+        padding: 1rem;
+        margin-top: 4.5rem;
+    }
+
+    /* Transform the flat sidebar index layout list block into a mobile overlay drawer */
+    .sidebar {
+        position: fixed;
+        top: 4.5rem;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 4.5rem);
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+        transform: translateY(-120%);
+        opacity: 0;
+    }
+
+    .sidebar.open {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    .article-header h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.4rem;
+    }
+
+    svg.markmap {
+        height: 40vh; /* Re-adjust graph block scale for compact handheld screens */
+    }
+}
+
